@@ -13,10 +13,8 @@ namespace Converter
     {
         //Список всех поддерживаемых форматов
         //Данный клас был создан с целью экономии ресурсов системы, посколько получить формат изображения
-        //из названия файлы куда экономнее, чем делать это через FileStream
-
-        Dictionary<string, MagickFormat> Formats = new Dictionary<string, MagickFormat>();
-        IFormat[] IFormats = new IFormat[]
+        //из названия файла куда экономнее, чем делать это через FileStream
+        Format[] Formats = new Format[]
             {
                 new Png(),
                 new Jpg(),
@@ -25,35 +23,30 @@ namespace Converter
                 new Ico()
             };
 
-        public FormatsType()
-        {            
-            foreach(IFormat format in IFormats)
-            {
-                Formats.Add(format.GetFormatToString(), format.GetFormatType());
-            }
+        public Format[] GetAllFormats()
+        {
+            return Formats;
         }
 
-        public IFormat[] GetAllFormats()
+        public List<string> GetAllExtensions()
         {
-            return IFormats;
-        }
+            List<string> extensions = new List<string>();
 
-        public List<string> GetAllFormatsToString()
-        {
-            List<string> formats = new List<string>();
-
-            foreach(string format in Formats.Keys)
+            foreach(Format format in Formats)
             {
-                formats.Add(format);
+                extensions.Add(format.GetExtension());
             }
 
-            return formats;
+            return extensions;
         }
 
-        public MagickFormat GetFormatByString(string format_string)
+        public MagickFormat GetFormatByExtension(string extension)
         {
-            if (Formats.ContainsKey(format_string))
-                return (Formats[format_string]);
+            foreach(Format format in Formats)
+            {
+                if (format.GetExtension() == extension)
+                    return format.GetFormat();
+            }
 
             return MagickFormat.Png;
         }

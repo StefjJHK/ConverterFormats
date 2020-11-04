@@ -43,7 +43,7 @@ namespace Converter.UI
         {
             Label label = new Label();
 
-            label.Content = file.Name + "." + file.FormatToString;
+            label.Content = file.Name + "." + file.Extension;
             label.Tag = file;
             label.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF424242"));
             label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2E2E2"));

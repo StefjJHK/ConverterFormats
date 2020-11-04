@@ -1,15 +1,10 @@
 ﻿using ImageMagick;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Converter.Formats
 {
-    class Png : IFormat
+    class Png : Format
     {
-        public override MagickFormat GetFormatType()
+        public override MagickFormat GetFormat()
         {
             return MagickFormat.Png;
         }

@@ -149,7 +149,7 @@ namespace Converter
         async private void asyncStartConverting(CancellationToken cancellationToken)
         {
             File[] files = ListFiles.GetSelectedFiles();
-            IFormat format = ListFormats.GetSelectedFormat();
+            Format format = ListFormats.GetSelectedFormat();
 
             ChangeStatusConverting(action: "Converting", max_value: files.Length);
 
@@ -159,7 +159,7 @@ namespace Converter
                 if (cancellationToken.IsCancellationRequested)
                     break;
 
-                ChangeStatusConverting(action: "Converting", obj: file.Name + "." + file.FormatToString);
+                ChangeStatusConverting(action: "Converting", obj: file.Name + "." + file.Extension);
 
                 text_folder.Dispatcher.Invoke(() => folder = text_folder.Text);
 

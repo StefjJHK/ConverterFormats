@@ -13,29 +13,18 @@ namespace Converter
 {    
     class ConverterFiles
     {                
-        public void SaveConvertedImage(File file, IFormat format, string folder)
+        public void SaveConvertedImage(File file, Format format, string folder)
         {
             FileStream fileStream = new FileStream(file.GetFullPath(), FileMode.Open);
             MagickImage magickImage = new MagickImage(fileStream);
 
-            magickImage.Format = format.GetFormatType();
+            magickImage.Format = format.GetFormat();
 
             Directory.CreateDirectory(file.Path + "\\" + folder + "\\");
 
-            magickImage.Write(file.Path + "\\" + folder + "\\" + file.Name + "." + format.GetFormatToString());
+            magickImage.Write(file.Path + "\\" + folder + "\\" + file.Name + "." + format.GetFormat().ToString().ToLower());
 
             fileStream.Close();
         }
-
-        //public Bitmap GetBitmap(File file)
-        //{
-        //    FileStream fileStream = new FileStream(file.GetFullPath(),
-        //          FileMode.Open);
-        //    MagickImage magickImage = new MagickImage(fileStream);            
-
-        //    byte[] imageBytes = magickImage.ToByteArray();
-
-        //    return (Bitmap)((new ImageConverter()).ConvertFrom(imageBytes));
-        //}
     }
 }

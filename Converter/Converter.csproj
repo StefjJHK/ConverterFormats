@@ -79,7 +79,7 @@
     <Compile Include="Formats\Ico.cs" />
     <Compile Include="Formats\Jpeg.cs" />
     <Compile Include="Formats\Png.cs" />
-    <Compile Include="IFormat.cs" />
+    <Compile Include="Entity\Format.cs" />
     <Compile Include="UI\ListFiles.cs" />
     <Compile Include="UI\ListFormats.cs" />
     <Page Include="MainWindow.xaml">
@@ -91,8 +91,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CheckDisk.cs" />
-    <Compile Include="File.cs" />
-    <Compile Include="Folder.cs" />
+    <Compile Include="Entity\File.cs" />
+    <Compile Include="Entity\Folder.cs" />
     <Compile Include="Formats\Cr2.cs" />
     <Compile Include="Formats\Jpg.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -26,36 +26,36 @@ namespace Converter.UI
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Properties.Settings.Default.Format = GetSelectedFormat().GetFormatType();
+            Properties.Settings.Default.Format = GetSelectedFormat().GetFormat();
             Properties.Settings.Default.Save();
         }
 
-        private void RefereshContent(IFormat[] formats)
+        private void RefereshContent(Format[] formats)
         {
             ListBox.Items.Clear();
 
-            foreach (IFormat format in formats)
+            foreach (Format format in formats)
             {
                 ListBox.Items.Add(GetLabel(format));
 
-                if (Properties.Settings.Default.Format == format.GetFormatType())
+                if (Properties.Settings.Default.Format == format.GetFormat())
                     ListBox.SelectedIndex = ListBox.Items.Count - 1;
             }
         }
 
-        public IFormat GetSelectedFormat()
+        public Format GetSelectedFormat()
         {
             if (ListBox.SelectedItem != null)
-                return (IFormat)((Label)ListBox.SelectedItem).Tag;
+                return (Format)((Label)ListBox.SelectedItem).Tag;
 
             return new Png();
         }        
 
-        private Label GetLabel(IFormat format)
+        private Label GetLabel(Format format)
         {
             Label label = new Label();
 
-            label.Content = format.GetFormatToString();
+            label.Content = format.GetExtension();
             label.Tag = format;
             label.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF424242"));
             label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2E2E2"));
