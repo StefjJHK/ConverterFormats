@@ -75,7 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ConverterFiles.cs" />
-    <Compile Include="FormatsType.cs" />
+    <Compile Include="SupportFormats.cs" />
     <Compile Include="Formats\Ico.cs" />
     <Compile Include="Formats\Jpeg.cs" />
     <Compile Include="Formats\Png.cs" />

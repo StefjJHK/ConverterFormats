@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Converter
 {
-    class FormatsType
+    class SupportFormats
     {
         //Список всех поддерживаемых форматов
         //Данный клас был создан с целью экономии ресурсов системы, посколько получить формат изображения

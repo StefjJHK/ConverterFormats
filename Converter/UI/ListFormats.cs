@@ -19,7 +19,7 @@ namespace Converter.UI
             this.ListBox = ListBox;
             ListBox.SelectionChanged += ListBox_SelectionChanged;
 
-            FormatsType FormatsType = new FormatsType();
+            SupportFormats FormatsType = new SupportFormats();
             Formats = FormatsType.GetAllFormats();
 
             RefereshContent(FormatsType.GetAllFormats());

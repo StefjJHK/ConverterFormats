@@ -8,8 +8,6 @@ using System.Collections.Generic;
 
 namespace Converter
 {
-    public delegate void PathChanged(string path);
-
     public partial class MainWindow : Window
     {
         enum STATUS
@@ -48,7 +46,7 @@ namespace Converter
             ListFiles = new ListFiles(list_box_files_info);
             ListFormats = new ListFormats(list_box_formats);
 
-            Folder = new Folder(new PathChanged(ChangeFolderInfo));
+            Folder = new Folder();
             Folder.ChangePath(Properties.Settings.Default.Path);
 
             LoadUI();
@@ -125,6 +123,11 @@ namespace Converter
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 Folder.ChangePath(folderBrowserDialog.SelectedPath);
+
+                ChangeFolderInfo(folderBrowserDialog.SelectedPath);
+
+                Properties.Settings.Default.Path = folderBrowserDialog.SelectedPath;
+                Properties.Settings.Default.Save();
             }
         }
 

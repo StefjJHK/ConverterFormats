@@ -5,32 +5,9 @@ namespace Converter
 {
     class Folder
     {
-        string _Path;
-        string Path
-        {
-            get
-            {
-                return _Path;
-            }
-            set
-            {
-                _Path = value;
+        SupportFormats SupportFormats = new SupportFormats();
 
-                PathChanged(value);
-
-                Properties.Settings.Default.Path = value;
-                Properties.Settings.Default.Save();
-            }
-        }
-
-        FormatsType FormatsType = new FormatsType();
-
-        PathChanged PathChanged;
-
-        public Folder(PathChanged PathChanged)
-        {
-            this.PathChanged = PathChanged;            
-        }
+        public string Path { get; private set; }
 
         public void ChangePath(string Path)
         {
@@ -39,7 +16,7 @@ namespace Converter
 
         public IEnumerable GetFiles()
         {
-            List<string> extensions = FormatsType.GetAllExtensions();
+            List<string> extensions = SupportFormats.GetAllExtensions();
 
             foreach (string file in System.IO.Directory.GetFiles(Path))
             {
