@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Converter.UI;
 using System.Threading;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Converter
 {
@@ -92,7 +93,12 @@ namespace Converter
         {
             label_path_info.Content = path;
 
-            ListFiles.RefereshContent(Folder.GetFiles());
+            ListFiles.ClearFiles();
+
+            foreach(File file in Folder.GetFiles())
+            {
+                ListFiles.AddFile(file);
+            }
         }
 
         private void ChangeStatusConverting(string action = "[null]", int step_progress = 0, int max_value = -1, string obj = "")
@@ -148,10 +154,10 @@ namespace Converter
         
         async private void asyncStartConverting(CancellationToken cancellationToken)
         {
-            File[] files = ListFiles.GetSelectedFiles();
+            List<File> files = ListFiles.GetSelectedFiles();
             Format format = ListFormats.GetSelectedFormat();
 
-            ChangeStatusConverting(action: "Converting", max_value: files.Length);
+            ChangeStatusConverting(action: "Converting", max_value: files.Count);
 
             string folder = "";
             foreach (File file in files)

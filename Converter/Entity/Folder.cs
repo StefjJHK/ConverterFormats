@@ -1,14 +1,10 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Converter
 {
     class Folder
     {
-        //fix branch
         string _Path;
         string Path
         {
@@ -41,27 +37,23 @@ namespace Converter
             this.Path = Path; 
         }
 
-        public File[] GetFiles()
+        public IEnumerable GetFiles()
         {
-            List<File> files = new List<File>();
-            List<string> formats = FormatsType.GetAllExtensions();
+            List<string> extensions = FormatsType.GetAllExtensions();
 
-            string format;
             foreach (string file in System.IO.Directory.GetFiles(Path))
             {
-                format = file.Substring(file.LastIndexOf('.') + 1).ToLower();                
-                if (formats.Contains(format))
+                var extension = file.Substring(file.LastIndexOf('.') + 1).ToLower();                
+                if (extensions.Contains(extension))
                 {
                     int start_position = file.LastIndexOf("\\") + 1;
                     
                     string name = file.Substring(start_position, file.LastIndexOf('.') - start_position);
                     string path = file.Substring(0, start_position - 1);
 
-                    files.Add(new File(name, path, format));
+                    yield return new File(name, path, extension);
                 }
             }
-
-            return files.ToArray();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Converter
         //Список всех поддерживаемых форматов
         //Данный клас был создан с целью экономии ресурсов системы, посколько получить формат изображения
         //из названия файла куда экономнее, чем делать это через FileStream
-        Format[] Formats = new Format[]
+        List<Format> Formats = new List<Format>
             {
                 new Png(),
                 new Jpg(),
@@ -23,7 +23,7 @@ namespace Converter
                 new Ico()
             };
 
-        public Format[] GetAllFormats()
+        public List<Format> GetAllFormats()
         {
             return Formats;
         }

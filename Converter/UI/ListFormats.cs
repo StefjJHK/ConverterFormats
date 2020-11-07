@@ -12,16 +12,30 @@ namespace Converter.UI
     class ListFormats
     {
         ListBox ListBox;
-
-        FormatsType FormatsType = new FormatsType();
+        List<Format> Formats;
 
         public ListFormats(ListBox ListBox)
         {
             this.ListBox = ListBox;
-
             ListBox.SelectionChanged += ListBox_SelectionChanged;
 
+            FormatsType FormatsType = new FormatsType();
+            Formats = FormatsType.GetAllFormats();
+
             RefereshContent(FormatsType.GetAllFormats());
+        }
+
+        private void RefereshContent(List<Format> formats)
+        {
+            ListBox.Items.Clear();
+
+            int count = 0;
+            for(int j = 0; j < Formats.Count(); j++)
+            {
+                ListBox.Items.Add(CreateLabel(Formats[j], j));
+
+                count++;
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -30,33 +44,20 @@ namespace Converter.UI
             Properties.Settings.Default.Save();
         }
 
-        private void RefereshContent(Format[] formats)
-        {
-            ListBox.Items.Clear();
-
-            foreach (Format format in formats)
-            {
-                ListBox.Items.Add(GetLabel(format));
-
-                if (Properties.Settings.Default.Format == format.GetFormat())
-                    ListBox.SelectedIndex = ListBox.Items.Count - 1;
-            }
-        }
-
         public Format GetSelectedFormat()
         {
             if (ListBox.SelectedItem != null)
-                return (Format)((Label)ListBox.SelectedItem).Tag;
+                return Formats[(int)((Label)ListBox.SelectedItem).Tag];
 
-            return new Png();
+            return Formats[0];
         }        
 
-        private Label GetLabel(Format format)
+        private Label CreateLabel(Format format, int index)
         {
             Label label = new Label();
 
             label.Content = format.GetExtension();
-            label.Tag = format;
+            label.Tag = index;
             label.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF424242"));
             label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2E2E2"));
             label.FontSize = 14;
