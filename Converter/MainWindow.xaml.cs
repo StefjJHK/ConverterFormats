@@ -5,6 +5,7 @@ using Converter.UI;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
+using ImageMagick;
 
 namespace Converter
 {
@@ -17,7 +18,7 @@ namespace Converter
         }
 
         Folder Folder;
-        ConverterFiles ConverterFiles = new ConverterFiles();
+        ConverterFile Converter = new ConverterFile();
         
         ListFiles ListFiles;
         ListFormats ListFormats;
@@ -41,12 +42,10 @@ namespace Converter
         {
             InitializeComponent();
 
-            CheckDisk CheckDisk = new CheckDisk();
-
             ListFiles = new ListFiles(list_box_files_info);
             ListFormats = new ListFormats(list_box_formats);
 
-            Folder = new Folder();
+            Folder = new Folder(label_path_info, text_folder);
             Folder.ChangePath(Properties.Settings.Default.Path);
 
             LoadUI();
@@ -89,14 +88,7 @@ namespace Converter
 
         private void ChangeFolderInfo(string path)
         {
-            label_path_info.Content = path;
-
-            ListFiles.ClearFiles();
-
-            foreach(File file in Folder.GetFiles())
-            {
-                ListFiles.AddFile(file);
-            }
+            ListFiles.ReNewFiles(Folder.GetFiles());
         }
 
         private void ChangeStatusConverting(string action = "[null]", int step_progress = 0, int max_value = -1, string obj = "")
@@ -125,9 +117,6 @@ namespace Converter
                 Folder.ChangePath(folderBrowserDialog.SelectedPath);
 
                 ChangeFolderInfo(folderBrowserDialog.SelectedPath);
-
-                Properties.Settings.Default.Path = folderBrowserDialog.SelectedPath;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -172,7 +161,11 @@ namespace Converter
 
                 text_folder.Dispatcher.Invoke(() => folder = text_folder.Text);
 
-                await Task.Run(() => ConverterFiles.SaveConvertedImage(file, format, folder));
+                MagickImage magickImage = await Task.Run(() => Converter.ConvertFile(file, format));
+
+                ChangeStatusConverting(action: "Saving", obj: file.Name);
+
+                await Task.Run(() => Folder.SaveImage(magickImage, file));
 
                 ChangeStatusConverting(step_progress: 1);
             }
@@ -182,14 +175,6 @@ namespace Converter
             System.Windows.MessageBox.Show("Completed!");
 
             list_box_files_info.SelectedItem = null;
-        }
-
-        private void text_folder_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            label_path_info.Content = Properties.Settings.Default.Path + "\\" + text_folder.Text;
-
-            Properties.Settings.Default.Folder = text_folder.Text;
-            Properties.Settings.Default.Save();
         }
 
         private void button_author_Click(object sender, RoutedEventArgs e)

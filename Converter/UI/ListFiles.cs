@@ -1,9 +1,6 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -19,16 +16,14 @@ namespace Converter.UI
             this.ListBox = ListBox;
         }
 
-        public void ClearFiles()
+        public void ReNewFiles(IEnumerable Files)
         {
-            ListBox.Items.Clear();
-            Files.Clear();
-        }
+            ClearFiles();
 
-        public void AddFile(File file)
-        {
-            Files.Add(file);
-            ListBox.Items.Add(CreateLabel(file, Files.Count()));
+            foreach (File file in Files)
+            {
+                AddFile(file);
+            }
         }
 
         public List<File> GetSelectedFiles()
@@ -41,6 +36,18 @@ namespace Converter.UI
             }
 
             return files;
+        }
+
+        private void ClearFiles()
+        {
+            ListBox.Items.Clear();
+            Files.Clear();
+        }
+
+        private void AddFile(File file)
+        {
+            Files.Add(file);
+            ListBox.Items.Add(CreateLabel(file, Files.Count()));
         }
 
         private Label CreateLabel(File file, int pos)

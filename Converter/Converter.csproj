@@ -74,8 +74,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConverterFiles.cs" />
-    <Compile Include="SupportFormats.cs" />
+    <Compile Include="Other\ConverterFile.cs" />
+    <Compile Include="Other\SupportFormats.cs" />
     <Compile Include="Formats\Ico.cs" />
     <Compile Include="Formats\Jpeg.cs" />
     <Compile Include="Formats\Png.cs" />
@@ -90,7 +90,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CheckDisk.cs" />
     <Compile Include="Entity\File.cs" />
     <Compile Include="Entity\Folder.cs" />
     <Compile Include="Formats\Cr2.cs" />

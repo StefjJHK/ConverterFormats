@@ -61,7 +61,7 @@ namespace Converter {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
-            Converter.App app = new Converter.App();
+            ConverterFile.App app = new ConverterFile.App();
             app.InitializeComponent();
             app.Run();
         }

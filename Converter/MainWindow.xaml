@@ -8,7 +8,7 @@
         Title="MainWindow" Height="388.8" Width="620">
     <Grid Background="#FF2E2E2E">
         <Grid Margin="4,45,149.6,10.2" >
-            <ListBox x:Name="list_box_files_info" SelectionMode="Multiple" Background="#FF2E2E2E" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" Margin="0,0,0,21">
+            <ListBox x:Name="list_box_files_info" SelectionMode="Multiple" Background="#FF2E2E2E" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" Margin="0,20,0,21">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="IsEnabled" Value="True"/>
@@ -25,9 +25,12 @@
             <Button x:Name="button_path_change" Content="Change" HorizontalAlignment="Right" Foreground="#FFE2E2E2" Background="#FF424242" BorderBrush="#FF424242" Width="81" Click="button_path_change_Click" Height="31" Margin="0,0,-0.2,0" VerticalAlignment="Top"/>
             <Label x:Name="label_path_info" Content="Path" Foreground="#FFE2E2E2" FontSize="14" Margin="0,0,85.8,0" VerticalContentAlignment="Center" Padding="0" Background="#FF282828"/>
         </Grid>
-        <Button x:Name="button_start_converting" Content="Start convertin" HorizontalAlignment="Right" Foreground="#FFE2E2E2" Background="#FF424242" BorderBrush="#FF424242" Width="141" Margin="0,0,3.6,51.2" VerticalAlignment="Bottom" Height="52" Click="button_start_converting_Click"/>
-        <TextBox x:Name="text_folder" ToolTip="Folder" HorizontalAlignment="Right" Height="31" Margin="0,40,3.6,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="141" Background="#FF282828" Foreground="#FFE2E2E2" BorderBrush="#FF282828" KeyUp="text_folder_KeyUp" VerticalContentAlignment="Center" FontSize="14"/>
-        <Grid Margin="0,84,3.6,108.2" HorizontalAlignment="Right" Width="141">
+        <Button x:Name="button_start_converting" Content="Start convertin" HorizontalAlignment="Right" Foreground="#FFE2E2E2" Background="#FF424242" BorderBrush="#FF424242" Width="141" Margin="0,0,3.6,31.2" VerticalAlignment="Bottom" Height="52" Click="button_start_converting_Click"/>
+        <Grid Margin="4,40,5,0" VerticalAlignment="Top">
+            <Label Content="Folder to save:" Foreground="#FFE2E2E2" VerticalContentAlignment="Center" Padding="0" Background="#FF282828" HorizontalAlignment="Left" Width="91"/>
+            <TextBox x:Name="text_folder" ToolTip="Folder" Height="20" TextWrapping="Wrap" Text="" Background="#FF282828" Foreground="#FFE2E2E2" BorderBrush="#FF282828" VerticalContentAlignment="Center" FontSize="14" Margin="96,0,0,0" HorizontalAlignment="Left" Width="157"/>
+        </Grid>
+        <Grid Margin="0,65,3.6,88.2" HorizontalAlignment="Right" Width="141">
             <ListBox x:Name="list_box_formats" Background="#FF2E2E2E" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" Margin="0,23,0,0">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
@@ -35,8 +38,8 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>
-            <Label x:Name="label_path_info_Copy" Content="Path" Foreground="#FFE2E2E2" FontSize="14" Margin="0" VerticalContentAlignment="Center" Padding="0" Background="#FF282828" VerticalAlignment="Top"/>
+            <Label x:Name="label_path_info_Copy" Content="Convert to:" Foreground="#FFE2E2E2" FontSize="14" Margin="0" VerticalContentAlignment="Center" Padding="0" Background="#FF282828" VerticalAlignment="Top"/>
         </Grid>
-        <Button x:Name="button_author" Content="Author VK" HorizontalAlignment="Right" Foreground="#FFE2E2E2" Background="#FF424242" BorderBrush="#FF424242" Width="141" Margin="0,0,3.6,10.2" VerticalAlignment="Bottom" Height="36" Click="button_author_Click"/>
+        <Button x:Name="button_author" Content="Author VK" HorizontalAlignment="Right" Foreground="#FFE2E2E2" Background="#FF424242" BorderBrush="#FF424242" Width="141" Margin="0,0,3.6,10.2" VerticalAlignment="Bottom" Height="16" Click="button_author_Click" FontSize="10"/>
     </Grid>
 </Window>

@@ -1,9 +1,5 @@
-﻿using Converter.Formats;
-using System;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -22,10 +18,18 @@ namespace Converter.UI
             SupportFormats FormatsType = new SupportFormats();
             Formats = FormatsType.GetAllFormats();
 
-            RefereshContent(FormatsType.GetAllFormats());
+            RefereshContent();
         }
 
-        private void RefereshContent(List<Format> formats)
+        public Format GetSelectedFormat()
+        {
+            if (ListBox.SelectedItem != null)
+                return Formats[(int)((Label)ListBox.SelectedItem).Tag];
+
+            return Formats[0];
+        }
+
+        private void RefereshContent()
         {
             ListBox.Items.Clear();
 
@@ -42,15 +46,7 @@ namespace Converter.UI
         {
             Properties.Settings.Default.Format = GetSelectedFormat().GetFormat();
             Properties.Settings.Default.Save();
-        }
-
-        public Format GetSelectedFormat()
-        {
-            if (ListBox.SelectedItem != null)
-                return Formats[(int)((Label)ListBox.SelectedItem).Tag];
-
-            return Formats[0];
-        }        
+        }   
 
         private Label CreateLabel(Format format, int index)
         {

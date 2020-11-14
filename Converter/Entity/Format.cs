@@ -1,4 +1,5 @@
 ﻿using ImageMagick;
+
 namespace Converter
 {
     abstract class Format
